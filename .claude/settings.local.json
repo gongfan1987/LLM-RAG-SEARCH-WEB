@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(kill %1)",
+      "Bash(pkill -f \"pip_done_marker\")",
+      "Bash(curl *)",
+      "Bash(/usr/bin/curl -s -i -X OPTIONS http://127.0.0.1:8000/api/auth/login -H 'Origin: http://localhost:3000' -H 'Access-Control-Request-Method: POST' -H 'Access-Control-Request-Headers: content-type')",
+      "Bash(/usr/bin/curl -s -i -X POST http://127.0.0.1:8000/api/auth/login -H 'Origin: http://localhost:3000' -H 'Content-Type: application/json' -d '{\"username\":\"tester1\",\"password\":\"Passw0rd123\"}')",
+      "Bash(.venv/bin/python -m py_compile app/services/chat_service.py app/routers/chat.py app/core/deps.py app/schemas/auth.py app/schemas/chat.py app/services/auth_service.py app/routers/auth.py)",
+      "Bash(rm -f test_dev.db)",
+      "Bash(nohup .venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000)",
+      "Bash(echo \"started pid $!\")",
+      "Bash(python *)"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "cc-workflow-studio"
+  ]
+}

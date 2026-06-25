@@ -1,0 +1,7 @@
+# 测试依赖（与运行时依赖分开，生产镜像不需要安装）
+-r requirements.txt
+pytest==9.1.1
+pytest-asyncio==1.4.0
+# 可选 e2e 测试（tests/test_e2e_rag.py，默认跳过）用 Milvus Lite 本地库，免启动 Milvus 服务端
+milvus-lite==3.0
+

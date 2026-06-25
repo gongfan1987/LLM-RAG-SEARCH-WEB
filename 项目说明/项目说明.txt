@@ -1,0 +1,19 @@
+你可以把 .claude/ 理解成项目里的 AI 配置中心。
+
+workflow/
+├── CLAUDE.md
+├── .claude/
+│   ├── settings.json
+│   ├── settings.local.json
+│   ├── commands/
+│   │   ├── commit.md
+│   │   ├── review.md
+│   │   ├── fix-bug.md
+│   │   ├── add-test.md
+│   │   └── explain.md
+│   └── rules/
+│       ├── code-style.md
+│       ├── architecture.md
+│       ├── test.md
+│       └── git.md
+└── .gitignore
