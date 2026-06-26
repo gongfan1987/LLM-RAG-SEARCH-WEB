@@ -95,6 +95,8 @@ class Settings(BaseSettings):
     milvus_dim: int = 0  # 向量维度，建集合时使用；留 0 则自动按 embedding 实际输出维度推导
     # 知识库专用集合：与对话索引集合分开（id 空间与语义不同）。
     milvus_kb_collection: str = ""
+    # 研究任务轨迹集合：与对话索引/知识库集合分开，避免向量 id 空间与 schema 互相污染。
+    milvus_trajectory_collection: str = "task_trajectory"
 
     @property
     def milvus_configured(self) -> bool:
@@ -182,6 +184,16 @@ class Settings(BaseSettings):
     @property
     def tavily_configured(self) -> bool:
         return bool(self.tavily_api_key)
+
+    # Redis：键值缓存 / 原子计数（限流、配额）。url 形如 redis://127.0.0.1:6379/0；
+    # 密码可写在 url 里，也可单独用 redis_password 注入（优先 url 内的密码）。
+    # 仅封装通用 KV 与计数能力，不含业务规则（见 app/utils/redis.py）。凭证走环境变量，勿硬编码。
+    redis_url: str = ""
+    redis_password: str = ""
+
+    @property
+    def redis_configured(self) -> bool:
+        return bool(self.redis_url)
 
     # 游客每日限额
     guest_daily_limit: int = 20

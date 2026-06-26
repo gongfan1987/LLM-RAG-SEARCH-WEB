@@ -160,3 +160,16 @@ def get_kb_milvus_client() -> MilvusStore:
         token=settings.effective_milvus_token,
         collection=settings.milvus_kb_collection,
     )
+
+
+@lru_cache
+def get_trajectory_milvus_client() -> MilvusStore:
+    """返回绑定到研究任务轨迹集合的 Milvus 客户端；未配置时抛出 MilvusError。"""
+    settings = get_settings()
+    if not (settings.milvus_uri and settings.milvus_trajectory_collection):
+        raise MilvusError("Milvus 轨迹库未配置：请设置 MILVUS_URI 与 MILVUS_TRAJECTORY_COLLECTION")
+    return MilvusStore(
+        uri=settings.milvus_uri,
+        token=settings.effective_milvus_token,
+        collection=settings.milvus_trajectory_collection,
+    )

@@ -7,11 +7,10 @@ import logging
 
 from app.core.config import get_settings
 from app.llm import get_embedding_client
-from app.utils.milvus import get_milvus_client
+from app.utils.milvus import get_trajectory_milvus_client
 
 logger = logging.getLogger(__name__)
 
-COLLECTION = "task_trajectory"
 _collection_ready = False
 
 
@@ -22,7 +21,7 @@ def index_trajectory(trajectory_id: int, user_id: int | None, topic: str, summar
         return
     try:
         vector = get_embedding_client().embed_query(summary)
-        store = get_milvus_client()
+        store = get_trajectory_milvus_client()
         _ensure_collection(store, settings.milvus_dim or len(vector))
         store.insert([{
             "id": trajectory_id, "user_id": user_id,
@@ -39,7 +38,7 @@ def related_trajectories(topic: str, user_id: int, top_k: int = 3) -> list[dict]
         return []
     try:
         vector = get_embedding_client().embed_query(topic)
-        store = get_milvus_client()
+        store = get_trajectory_milvus_client()
         hits = store.search(
             vector, limit=top_k,
             output_fields=["topic", "summary"],
