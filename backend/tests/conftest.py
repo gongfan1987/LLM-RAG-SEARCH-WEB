@@ -15,8 +15,7 @@ from app.db.base import Base
 import app.models.user  # noqa: F401
 import app.models.chat_session  # noqa: F401
 import app.research.state.models  # noqa: F401
-# 待 Task 4 创建 memory.models 后取消注释
-# import app.research.memory.models  # noqa: F401
+import app.research.memory.models  # noqa: F401
 
 
 @pytest.fixture
