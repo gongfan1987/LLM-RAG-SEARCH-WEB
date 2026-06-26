@@ -123,7 +123,7 @@ def _to_passage(hit: dict) -> dict:
         "scope": entity.get("scope", ""),
     }
 
-
+#在项目中做记忆层设计，全局共享状态ResearchState，设计全局共享状态机制，统一维护研究大纲。假设，事实，数据点，图标，草稿，终稿，评审反馈字段，实现跨Agent只是持续积累和状态传递。设计上下文Memory模块，记录用户历史问题，研究偏好和任务轨迹，增强多轮任务连贯与个性化交互体验。
 def build_context_block(passages: list[dict]) -> str | None:
     """把召回片段拼成一段 system 上下文文本；无片段时返回 None。"""
     lines = []
