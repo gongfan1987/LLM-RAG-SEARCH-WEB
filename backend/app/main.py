@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import get_settings
 from app.db.base import Base, engine
-from app.routers import auth, chat, knowledge_base, sessions
+from app.routers import auth, chat, knowledge_base, research, sessions
 
 settings = get_settings()
 
@@ -22,6 +22,7 @@ app.include_router(auth.router)
 app.include_router(sessions.router)
 app.include_router(chat.router)
 app.include_router(knowledge_base.router)
+app.include_router(research.router)
 
 
 @app.on_event("startup")
